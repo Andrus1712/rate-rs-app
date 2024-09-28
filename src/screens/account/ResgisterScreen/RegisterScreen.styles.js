@@ -1,4 +1,11 @@
-import { StyleSheet } from "react-native";
+import {StyleSheet} from "react-native";
 
 
-export const styles = StyleSheet.create({});
+export const styles = StyleSheet.create({
+    image: {
+        resizeMode: "contain",
+        height: 150,
+        width: "100%",
+        marginBottom: 20
+    },
+});
