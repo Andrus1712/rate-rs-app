@@ -1,5 +1,5 @@
 import { ScrollView } from 'react-native';
-import { styles } from "./UserGuestScreen.style";
+import { styles } from "./UserGuestScreen.styles";
 import { Button, Image, Text } from "@rneui/base";
 import { useNavigation } from '@react-navigation/native';
 import { screen } from '../../../utils';
