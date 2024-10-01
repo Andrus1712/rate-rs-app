@@ -1,2 +1,2 @@
-export * from './LoadingModal';
-export * from './LoadingModal.styles';
+export * from "./LoadingModal";
+export * from "./LoadingModal.styles";

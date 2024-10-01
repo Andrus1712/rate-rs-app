@@ -1,2 +1,2 @@
-export * from './LoginScreen';
-export * from './LoginScreen.styles';
+export * from "./LoginScreen";
+export * from "./LoginScreen.styles";
