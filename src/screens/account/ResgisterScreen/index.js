@@ -1,2 +1,2 @@
-export * from './RegisterScreen';
-export * from './RegisterScreen.styles';
+export * from "./RegisterScreen";
+export * from "./RegisterScreen.styles";
