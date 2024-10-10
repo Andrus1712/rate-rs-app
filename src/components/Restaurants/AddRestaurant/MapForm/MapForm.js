@@ -42,7 +42,6 @@ export function MapForm(props) {
 
   const saveLocation = async location => {
     await formik.setFieldValue("location", location);
-    console.log("saveLocation", location);
     close();
   };
 

@@ -27,7 +27,7 @@ export function InfoForm(props) {
             type: "material-community",
             name: "map-marker-radius",
             size: 35,
-            color: "#c2c2c2",
+            color: getColorIconMap(formik),
             onPress: () => onOpenCloseMap(),
           }}
           onChangeText={value => formik.setFieldValue("address", value)}
@@ -56,3 +56,8 @@ export function InfoForm(props) {
     </>
   );
 }
+
+const getColorIconMap = formik => {
+  if (formik.errors.location) return "#ff0000";
+  if (formik.values.location) return "#00a680";
+};
