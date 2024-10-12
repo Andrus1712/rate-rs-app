@@ -7,17 +7,47 @@ import { initialValues, validationSchema } from "./AddRestaurantScreen.data";
 import { useState } from "react";
 import { LoadingModal } from "../../../components";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import uuid from "react-native-uuid";
+import { db } from "../../../utils";
+import { addDoc, collection } from "firebase/firestore";
+import { useNavigation } from "@react-navigation/native";
 
 export const AddRestaurantScreen = () => {
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState(null);
   const [progress, setProgress] = useState(0);
+  const navigation = useNavigation();
 
   const formik = useFormik({
     initialValues: initialValues(),
     validationSchema: validationSchema(),
     onSubmit: async (values, actions) => {
-      console.log(values);
+      try {
+        const newData = values;
+        newData.id = uuid.v4();
+        newData.createdAt = new Date();
+
+        // await db
+        //   .collection("restaurants")
+        //   .doc(newData.id)
+        //   .set(newData)
+        //   .then(() => {
+        //     console.log("Document successfully written!");
+        //   })
+        //   .catch(error => {
+        //     console.error("Error writing document: ", error);
+        //   });
+        await addDoc(collection(db, "restaurants"), newData)
+          .then(() => {
+            console.log("data entered");
+            navigation.goBack();
+          })
+          .catch(err => {
+            console.log({ err });
+          });
+      } catch (error) {
+        console.log(error);
+      }
     },
     validateOnChange: false,
   });
