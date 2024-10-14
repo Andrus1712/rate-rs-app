@@ -30,7 +30,8 @@ export function ListRestaurants(props) {
               <View>
                 <Text style={styles.textName}>{restaurant.name}</Text>
                 <Text style={styles.textInfo}>{restaurant.address}</Text>
-                <Text style={styles.textInfo}>{restaurant.description}</Text>
+                <Text style={styles.textInfo}>{restaurant.phone}</Text>
+                <Text style={styles.textInfo}>{restaurant.email}</Text>
               </View>
             </View>
           </TouchableOpacity>

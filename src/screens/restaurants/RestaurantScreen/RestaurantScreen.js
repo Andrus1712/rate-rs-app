@@ -1,7 +1,11 @@
-import { Text, View } from "react-native";
+import { Dimensions, ScrollView } from "react-native";
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { db } from "../../../utils";
+
+import { styles } from "./RestaurantScreen.styles";
+import { CarouselComponent, Loading } from "../../../components";
+import { Header, Info } from "../../../components/Restaurant";
 
 export function RestaurantScreen(props) {
   const { route } = props;
@@ -11,8 +15,6 @@ export function RestaurantScreen(props) {
   useEffect(() => {
     setRestaurant(null);
 
-    console.log(route.params.id);
-
     const q = query(
       collection(db, "restaurants"),
       where("id", "==", route.params.id),
@@ -21,18 +23,23 @@ export function RestaurantScreen(props) {
     onSnapshot(q, snapshot => {
       if (!snapshot.empty) {
         const singleDoc = snapshot.docs[0];
-        console.log({ singleDoc });
-        setRestaurant(singleDoc);
+        const dataRestaurant = singleDoc.data();
+        setRestaurant(dataRestaurant);
       } else {
         console.log("Not restaurant found");
       }
     });
   }, [route.params.id]);
 
+  const { width } = Dimensions.get("window");
+
+  if (!restaurant) return <Loading show={true} text={"Loading..."} />;
+
   return (
-    <View>
-      <Text>{JSON.stringify(route.params.id)}</Text>
-      <Text>{JSON.stringify(restaurant)}</Text>
-    </View>
+    <ScrollView style={styles.contentContainer}>
+      <CarouselComponent images={restaurant.images} width={width} height={250} />
+      <Header restaurant={restaurant} />
+      <Info restaurant={restaurant} />
+    </ScrollView>
   );
 }
