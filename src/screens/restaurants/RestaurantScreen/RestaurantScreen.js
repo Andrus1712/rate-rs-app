@@ -1,35 +1,45 @@
-import { Text, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { Button, Icon } from "@rneui/base";
-import { getAuth, screen } from "../../../utils";
-import { styles } from "./RestaurantScreen.styles";
-import {onAuthStateChanged} from "firebase/auth"
+import { Dimensions, ScrollView } from "react-native";
 import { useEffect, useState } from "react";
+import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
+import { db } from "../../../utils";
 
-export const RestaurantScreen = props => {
-  const { navigate } = useNavigation();
-  const [currentUser, setCurrentUser] = useState(null);
+import { styles } from "./RestaurantScreen.styles";
+import { CarouselComponent, Loading } from "../../../components";
+import { Header, Info } from "../../../components/Restaurant";
+
+export function RestaurantScreen(props) {
+  const { route } = props;
+
+  const [restaurant, setRestaurant] = useState(null);
+
   useEffect(() => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      setCurrentUser
-    })
-  }, []);
-  const goToAddRestaurant = () => {
-    navigate(screen.restaurant.tab, { screen: screen.restaurant.add });
-  };
-  return (
-    <View style={styles.container}>
-      <Text>Restaurants Screen</Text>
+    setRestaurant(null);
 
-      <Icon
-        name={"plus"}
-        type={"material-community"}
-        color="#00a680"
-        reverse={true}
-        containerStyle={styles.btnContainer}
-        onPress={goToAddRestaurant}
-      />
-    </View>
+    const q = query(
+      collection(db, "restaurants"),
+      where("id", "==", route.params.id),
+      orderBy("createdAt", "desc")
+    );
+    onSnapshot(q, snapshot => {
+      if (!snapshot.empty) {
+        const singleDoc = snapshot.docs[0];
+        const dataRestaurant = singleDoc.data();
+        setRestaurant(dataRestaurant);
+      } else {
+        console.log("Not restaurant found");
+      }
+    });
+  }, [route.params.id]);
+
+  const { width } = Dimensions.get("window");
+
+  if (!restaurant) return <Loading show={true} text={"Loading..."} />;
+
+  return (
+    <ScrollView style={styles.contentContainer}>
+      <CarouselComponent images={restaurant.images} width={width} height={250} />
+      <Header restaurant={restaurant} />
+      <Info restaurant={restaurant} />
+    </ScrollView>
   );
-};
+}

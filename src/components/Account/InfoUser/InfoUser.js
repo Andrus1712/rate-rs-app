@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, View } from "react-native";
 import { Avatar } from "@rneui/base";
 import { styles } from "./InfoUser.styles";
-import { getAuth } from "../../../utils";
+import { getAuth, storage } from "../../../utils";
 import * as ImagePicker from "expo-image-picker";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
@@ -33,7 +33,6 @@ export function InfoUser(props) {
     setLoadingText("Uploading image...");
     const response = await fetch(uri);
     const blob = await response.blob();
-    const storage = getStorage();
     const storageRef = ref(storage, `Avatar/${uid}`);
 
     uploadBytes(storageRef, blob).then(snapshot => {

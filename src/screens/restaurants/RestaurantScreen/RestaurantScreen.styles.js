@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  container: {
+  contentContainer: {
+    backgroundColor: "#fff",
     flex: 1,
   },
-  btnContainer: {
-    position: "absolute",
-    right: 10,
-    bottom: 10,
+  infoContainer: {
+    borderWidth: 1,
+    borderColor: "blue",
   },
 });
