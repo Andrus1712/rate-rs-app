@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { Rating, Text } from "@rneui/base";
+import { AirbnbRating, Divider, Text } from "@rneui/base";
 import { styles } from "./Header.styles";
 
 export function Header(props) {
@@ -8,13 +8,17 @@ export function Header(props) {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.text}>{restaurant.name}</Text>
-        <Rating
-          showRating
-          imageSize={10}
-          readonly={true}
-          style={styles.rating}
-        />
+        <View>
+          <AirbnbRating
+            count={5}
+            isDisabled={true}
+            defaultRating={2}
+            size={20}
+            showRating={false}
+          />
+        </View>
       </View>
+      <Divider style={styles.divider} />
       <Text style={styles.description}>{restaurant.description}</Text>
     </View>
   );

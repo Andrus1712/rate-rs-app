@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    flex: 1,
   },
   text: {
     fontSize: 20,
@@ -17,7 +18,10 @@ export const styles = StyleSheet.create({
     width: 20,
   },
   description: {
-    marginTop: 5,
+    paddingTop: 10,
     color: "#828282",
+  },
+  divider: {
+    marginTop: 10,
   },
 });

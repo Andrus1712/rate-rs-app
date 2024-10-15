@@ -39,7 +39,6 @@ export const AddRestaurantScreen = () => {
         //   });
         await addDoc(collection(db, "restaurants"), newData)
           .then(() => {
-            console.log("data entered");
             navigation.goBack();
           })
           .catch(err => {
