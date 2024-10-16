@@ -7,7 +7,7 @@ import { getAuth, screen } from "../../../utils";
 import { useNavigation } from "@react-navigation/native";
 
 export function BtnReviewForm(props) {
-  const { idRestaurant } = props;
+  const { uidRestaurant, idRestaurant } = props;
   const [hasLogged, setHasLogged] = useState(false);
   const auth = getAuth();
   const navigation = useNavigation();
@@ -29,6 +29,7 @@ export function BtnReviewForm(props) {
       screen: screen.restaurant.review,
       params: {
         idRestaurant,
+        uidRestaurant,
       },
     });
   };

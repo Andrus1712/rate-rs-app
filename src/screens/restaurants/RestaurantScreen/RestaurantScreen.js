@@ -24,6 +24,7 @@ export function RestaurantScreen(props) {
       if (!snapshot.empty) {
         const singleDoc = snapshot.docs[0];
         const dataRestaurant = singleDoc.data();
+        dataRestaurant.uid = singleDoc.id;
         setRestaurant(dataRestaurant);
       } else {
         console.log("Not restaurant found");
@@ -40,7 +41,7 @@ export function RestaurantScreen(props) {
       <CarouselComponent images={restaurant.images} width={width} height={250} />
       <Header restaurant={restaurant} />
       <Info restaurant={restaurant} />
-      <BtnReviewForm idRestaurant={restaurant.id} />
+      <BtnReviewForm idRestaurant={restaurant.id} uidRestaurant={restaurant.uid} />
     </ScrollView>
   );
 }
