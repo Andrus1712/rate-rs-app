@@ -30,6 +30,7 @@ export function Reviews(props) {
           reviews.push({
             ...reviewData,
             user: userData,
+            key: reviewDoc.id,
           });
         }
 
@@ -55,7 +56,7 @@ export function Reviews(props) {
 
   return (
     <View style={styles.container}>
-      {reviewsList.map(review => {
+      {reviewsList.map((review, i) => {
         return (
           <ListItem key={review.key} bottomDivider containerStyle={styles.reviewsContainer}>
             <Avatar
