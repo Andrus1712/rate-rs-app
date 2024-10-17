@@ -5,7 +5,7 @@ import { db } from "../../../utils";
 
 import { styles } from "./RestaurantScreen.styles";
 import { CarouselComponent, Loading } from "../../../components";
-import { Header, Info } from "../../../components/Restaurant";
+import { BtnReviewForm, Header, Info, Reviews } from "../../../components/Restaurant";
 
 export function RestaurantScreen(props) {
   const { route } = props;
@@ -24,6 +24,7 @@ export function RestaurantScreen(props) {
       if (!snapshot.empty) {
         const singleDoc = snapshot.docs[0];
         const dataRestaurant = singleDoc.data();
+        dataRestaurant.uid = singleDoc.id;
         setRestaurant(dataRestaurant);
       } else {
         console.log("Not restaurant found");
@@ -40,6 +41,8 @@ export function RestaurantScreen(props) {
       <CarouselComponent images={restaurant.images} width={width} height={250} />
       <Header restaurant={restaurant} />
       <Info restaurant={restaurant} />
+      <BtnReviewForm idRestaurant={restaurant.id} uidRestaurant={restaurant.uid} />
+      <Reviews idRestaurant={restaurant.id} />
     </ScrollView>
   );
 }

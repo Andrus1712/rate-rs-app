@@ -1,14 +1,15 @@
 import { View } from "react-native";
-import { getAuth } from "../../../utils";
+import { db, getAuth } from "../../../utils";
 import { AccountOptions, InfoUser } from "../../../components/Account";
 import { styles } from "./UserLoggedScreen.styles";
 import { Button } from "@rneui/base";
 import { signOut } from "firebase/auth";
 import { LoadingModal } from "../../../components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { doc, setDoc } from "firebase/firestore";
 
 export const UserLoggedScreen = () => {
-  const [_reload, setReload] = useState(false);
+  const [reload, setReload] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingText, setLoadingText] = useState("");
   const logout = async () => {
@@ -16,13 +17,28 @@ export const UserLoggedScreen = () => {
     await signOut(auth);
   };
 
+  useEffect(() => {
+    const updateUser = async () => {
+      const user = getAuth().currentUser;
+      const userRef = doc(db, "users", user.uid);
+      await setDoc(userRef, {
+        displayName: user.displayName,
+        email: user.email,
+        avatar: user.photoURL,
+      });
+    };
+    updateUser().catch(e => {
+      console.log(e);
+    });
+  }, [reload]);
+
   const onReload = () => {
     setReload(prevState => !prevState);
   };
 
   return (
     <View style={styles.container}>
-      <InfoUser setLoading={setLoading} setLoadingText={setLoadingText} />
+      <InfoUser onReload={onReload} setLoading={setLoading} setLoadingText={setLoadingText} />
       <AccountOptions onReload={onReload} />
       <Button
         title={"Close session"}
@@ -31,7 +47,7 @@ export const UserLoggedScreen = () => {
         onPress={() => logout()}
       />
 
-      <LoadingModal show={loading} text={loadingText} />
+      <LoadingModal show={loading} text={loadingText} progress={0} />
     </View>
   );
 };

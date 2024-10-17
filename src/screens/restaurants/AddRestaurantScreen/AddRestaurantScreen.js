@@ -27,19 +27,8 @@ export const AddRestaurantScreen = () => {
         newData.id = uuid.v4();
         newData.createdAt = new Date();
 
-        // await db
-        //   .collection("restaurants")
-        //   .doc(newData.id)
-        //   .set(newData)
-        //   .then(() => {
-        //     console.log("Document successfully written!");
-        //   })
-        //   .catch(error => {
-        //     console.error("Error writing document: ", error);
-        //   });
         await addDoc(collection(db, "restaurants"), newData)
           .then(() => {
-            console.log("data entered");
             navigation.goBack();
           })
           .catch(err => {

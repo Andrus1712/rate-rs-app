@@ -34,7 +34,6 @@ export const logCustomEvent = async event => {
   logEvent(getAnalytics(), event, { platform: "web" });
 };
 
-
 const auth = initializeAuth(initFirebase, {
   persistence: getReactNativePersistence(ReactNativeAsyncStorage),
 });

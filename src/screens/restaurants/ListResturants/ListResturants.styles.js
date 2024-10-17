@@ -4,7 +4,6 @@ export const styles = StyleSheet.create({
   restaurantList: {
     flexDirection: "row",
     margin: 10,
-    backgroundColor: "#fff",
     padding: 5,
     borderRadius: 10
   },

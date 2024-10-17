@@ -3,6 +3,7 @@ import { screen } from "../utils";
 import { RestaurantsScreen } from "../screens/restaurants/RestaurantsScreen";
 import { AddRestaurantScreen } from "../screens/restaurants/AddRestaurantScreen";
 import { RestaurantScreen } from "../screens/restaurants/RestaurantScreen";
+import { AddReviewRestaurantScreen } from "../screens/restaurants/AddReviewRestaurantScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +26,11 @@ const RestaurantStack = () => {
         options={({ route }) => ({
           title: route.params.name ? route.params.name : "title",
         })}
+      />
+      <Stack.Screen
+        name={screen.restaurant.review}
+        component={AddReviewRestaurantScreen}
+        options={{ title: "Reviews" }}
       />
     </Stack.Navigator>
   );

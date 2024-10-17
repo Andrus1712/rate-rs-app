@@ -3,6 +3,7 @@ const restaurantStack = {
   index: "restaurant-index",
   add: "restaurant-new",
   show: "restaurant-show",
+  review: "restaurant-review",
 };
 
 const favoritesStack = {
