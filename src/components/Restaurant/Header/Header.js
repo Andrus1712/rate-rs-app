@@ -12,7 +12,7 @@ export function Header(props) {
           <AirbnbRating
             count={5}
             isDisabled={true}
-            defaultRating={2}
+            defaultRating={restaurant.ratingMedia ? restaurant.ratingMedia : 0}
             size={20}
             showRating={false}
           />

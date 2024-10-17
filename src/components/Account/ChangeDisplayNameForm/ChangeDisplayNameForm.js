@@ -18,6 +18,7 @@ export function ChangeDisplayNameForm(props) {
         const { displayName } = values;
         const currentUser = getAuth().currentUser;
         await updateProfile(currentUser, { displayName });
+
         onReload();
         onClose();
       } catch (e) {

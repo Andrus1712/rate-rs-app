@@ -84,8 +84,6 @@ export function AddReviewRestaurantScreen(props) {
   return (
     <View style={styles.container}>
       <View>
-        <Text>{route.params.idRestaurant}</Text>
-        <Text>{route.params.uidRestaurant}</Text>
         <View style={styles.ratingContainer}>
           <AirbnbRating
             count={5}

@@ -2,7 +2,7 @@ import { ActivityIndicator, View } from "react-native";
 import { LinearProgress, Overlay, Text } from "@rneui/base";
 import { styles } from "./LoadingModal.styles";
 
-export const LoadingModal = (props) => {
+export const LoadingModal = props => {
   const { show, text, progress } = props;
 
   return (
@@ -14,8 +14,4 @@ export const LoadingModal = (props) => {
       </View>
     </Overlay>
   );
-};
-
-LoadingModal.defaultProps = {
-  show: false,
 };

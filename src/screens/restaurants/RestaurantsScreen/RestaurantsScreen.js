@@ -32,13 +32,14 @@ export const RestaurantsScreen = props => {
   const goToAddRestaurant = () => {
     navigate(screen.restaurant.tab, { screen: screen.restaurant.add });
   };
+
+  if (!restaurants) {
+    return <LoadingModal show={true} text={"loading data"} progress={0} />;
+  }
+
   return (
     <View style={styles.container}>
-      {!restaurants ? (
-        <LoadingModal show={loading} text={"loading data"} progress={0} />
-      ) : (
-        <ListRestaurants restaurants={restaurants} />
-      )}
+      <ListRestaurants restaurants={restaurants} />
       {currentUser !== null && (
         <Icon
           name={"plus"}

@@ -8,7 +8,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { updateProfile } from "firebase/auth";
 
 export function InfoUser(props) {
-  const { setLoading, setLoadingText } = props;
+  const { setLoading, setLoadingText, onReload } = props;
   const { uid, email, displayName, photoURL } = getAuth().currentUser;
 
   const [avatar, setAvatar] = useState(photoURL);
@@ -51,6 +51,8 @@ export function InfoUser(props) {
       photoURL: imgURL,
     });
     setAvatar(imgURL);
+
+    onReload();
   };
 
   return (
