@@ -5,7 +5,7 @@ import { db } from "../../../utils";
 
 import { styles } from "./RestaurantScreen.styles";
 import { CarouselComponent, Loading } from "../../../components";
-import { BtnReviewForm, Header, Info, Reviews } from "../../../components/Restaurant";
+import { BtnFavorite, BtnReviewForm, Header, Info, Reviews } from "../../../components/Restaurant";
 
 export function RestaurantScreen(props) {
   const { route } = props;
@@ -43,6 +43,7 @@ export function RestaurantScreen(props) {
       <Info restaurant={restaurant} />
       <BtnReviewForm idRestaurant={restaurant.id} uidRestaurant={restaurant.uid} />
       <Reviews idRestaurant={restaurant.id} />
+      <BtnFavorite idRestaurant={restaurant.id} />
     </ScrollView>
   );
 }
