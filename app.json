@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "curso-app",
-    "slug": "curso-app",
+    "name": "Rate yours restaurants",
+    "slug": "rate-curse-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#008AFF"
     },
     "ios": {
       "supportsTablet": true,
@@ -22,7 +22,8 @@
       },
       "permissions": [
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "package": "com.andrus1217.ratecurseapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -33,7 +34,21 @@
         {
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "enablePngCrunchInReleaseBuilds": false
+          }
+        }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "7bcb381d-30ce-4b17-97d0-6d4b924af04a"
+      }
+    },
+    "owner": "andrus1217"
   }
 }
