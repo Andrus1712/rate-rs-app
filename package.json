@@ -1,6 +1,6 @@
 {
-  "name": "curso-app",
-  "version": "1.0.0",
+  "name": "rate-app",
+  "version": "1.10.24",
   "main": "expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -36,7 +36,8 @@
     "react-native-toast-message": "^2.2.1",
     "react-native-uuid": "^2.0.2",
     "react-native-vector-icons": "^10.2.0",
-    "yup": "^1.4.0"
+    "yup": "^1.4.0",
+    "expo-dev-client": "~4.0.28"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
