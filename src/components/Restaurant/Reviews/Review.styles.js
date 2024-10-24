@@ -34,5 +34,8 @@ export const styles = StyleSheet.create({
   dateContent: {
     fontSize: 12,
     color: "#828282",
-  }
+  },
+  textValidateReviewed: {
+    textAlign: "center",
+  },
 });

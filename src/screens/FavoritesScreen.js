@@ -13,6 +13,7 @@ import { Loading } from "../components";
 const FavoritesScreen = props => {
   const [hasLogged, setHasLogged] = useState(null);
   const [restaurantsList, setRestaurantsList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const auth = getAuth();
   useEffect(() => {
     onAuthStateChanged(auth, user => {
@@ -21,18 +22,21 @@ const FavoritesScreen = props => {
   }, []);
 
   useEffect(() => {
-    const q = query(collection(db, "favorites"), where("idUser", "==", auth.currentUser.uid));
-    onSnapshot(q, async snapshot => {
-      const fetchedFavorites = [];
-      for (const doc of snapshot.docs) {
-        const data = doc.data();
-
-        const infoRestaurant = await getRestaurantById(data.idRestaurant);
-        infoRestaurant.udoc = doc.id;
-        fetchedFavorites.push(infoRestaurant);
-      }
-      setRestaurantsList(fetchedFavorites);
-    });
+    if (hasLogged) {
+      setIsLoading(true);
+      const q = query(collection(db, "favorites"), where("idUser", "==", auth.currentUser.uid));
+      onSnapshot(q, async snapshot => {
+        const fetchedFavorites = [];
+        for (const doc of snapshot.docs) {
+          const data = doc.data();
+          const infoRestaurant = await getRestaurantById(data.idRestaurant);
+          infoRestaurant.udoc = doc.id;
+          fetchedFavorites.push(infoRestaurant);
+        }
+        setRestaurantsList(fetchedFavorites);
+      });
+      setIsLoading(false);
+    }
 
     return () => {
       setRestaurantsList([]);
@@ -50,11 +54,13 @@ const FavoritesScreen = props => {
     }
   }
 
+  console.log(restaurantsList);
+
   if (!hasLogged) {
     return <UserNotLogged />;
   }
 
-  if (!restaurantsList) {
+  if (isLoading) {
     return <Loading show={true} text="Loading restaurants..." proggress={0} />;
   }
 

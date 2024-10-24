@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import { styles } from "./AddReviewRestaurantScreen.styles";
-import { AirbnbRating, Button, Input, Text } from "@rneui/base";
+import { Button, Input, Text } from "@rneui/base";
 import { useFormik } from "formik";
 import { initialValues, validationSchema } from "./AddReviewRestaurantScreen.data";
 import Toast from "react-native-toast-message";
@@ -8,6 +8,7 @@ import uuid from "react-native-uuid";
 import { db, getAuth } from "../../../utils";
 import { addDoc, collection, doc, onSnapshot, query, updateDoc, where } from "firebase/firestore";
 import { useNavigation } from "@react-navigation/native";
+import { Rating } from "@kolking/react-native-rating";
 
 export function AddReviewRestaurantScreen(props) {
   const { route } = props;
@@ -85,11 +86,10 @@ export function AddReviewRestaurantScreen(props) {
     <View style={styles.container}>
       <View>
         <View style={styles.ratingContainer}>
-          <AirbnbRating
-            count={5}
-            defaultRating={0}
-            size={35}
-            onFinishRating={rating => formik.setFieldValue("rating", rating)}
+          <Rating
+            size={50}
+            rating={formik.values.rating}
+            onMove={rating => formik.setFieldValue("rating", rating)}
           />
           <Text style={{ color: "red" }}>{formik.errors.rating}</Text>
         </View>
