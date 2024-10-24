@@ -2,7 +2,7 @@
   "expo": {
     "name": "rate-app",
     "slug": "rate-app",
-    "version": "1.0.5",
+    "version": "1.10.24",
     "orientation": "portrait",
     "icon": "./assets/img/icon-official.png",
     "userInterfaceStyle": "light",
@@ -22,7 +22,13 @@
       },
       "permissions": [
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "package": "com.andrus1217.rateapp",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBvkRAdUWROCCdRMb6QleMakoh6Wls2TIk"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/img/icon-official.png"
@@ -34,6 +40,11 @@
           "photosPermission": "The app accesses your photos to let you share them with your friends."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "b8e277d0-916f-4d0f-80c0-33287ee9b36d"
+      }
+    }
   }
 }
