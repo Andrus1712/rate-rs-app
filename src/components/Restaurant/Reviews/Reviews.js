@@ -3,14 +3,17 @@ import { styles } from "./Review.styles";
 import { useEffect, useState } from "react";
 import { collection, doc, getDoc, onSnapshot, orderBy, query, where } from "firebase/firestore";
 import { db } from "../../../utils";
-import { AirbnbRating, Avatar, ListItem } from "@rneui/base";
+import { Avatar, ListItem } from "@rneui/base";
 import { Loading } from "../../Shared";
+import { Rating } from "@kolking/react-native-rating";
 
 export function Reviews(props) {
   const { idRestaurant } = props;
   const [reviewsList, setReviewsList] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
     const q = query(
       collection(db, "reviews"),
       where("idRestaurant", "==", idRestaurant),
@@ -35,7 +38,10 @@ export function Reviews(props) {
         }
 
         setReviewsList(reviews);
+      } else {
+        setReviewsList(null);
       }
+      setIsLoading(false);
     });
   }, [idRestaurant]);
 
@@ -49,6 +55,10 @@ export function Reviews(props) {
       console.log("No se encontró información del usuario.");
     }
   };
+
+  if (!reviewsList) {
+    return null;
+  }
 
   if (!reviewsList) {
     return <Loading show={true} text={"Loading"} />;
@@ -69,13 +79,9 @@ export function Reviews(props) {
               <View style={styles.subTitle}>
                 <Text style={styles.comment}>{review.comment}</Text>
                 <View style={styles.contentRatingDate}>
-                  <AirbnbRating
-                    showRating={false}
-                    size={15}
-                    defaultRating={review.rating}
-                    isDisabled={true}
-                    starContainerStyle={styles.starRating}
-                  />
+                  <View>
+                    <Rating size={15} rating={review.rating} disabled />
+                  </View>
                   <Text style={styles.dateContent}>
                     {review.createdAt.toDate().toLocaleDateString("es-CO")}
                   </Text>

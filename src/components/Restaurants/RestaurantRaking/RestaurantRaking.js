@@ -1,8 +1,9 @@
 import { FlatList, TouchableOpacity, View } from "react-native";
-import { AirbnbRating, Icon, Image, Text } from "@rneui/base";
+import { Icon, Image, Text } from "@rneui/base";
 import { styles } from "./RestaurantRaking.styles";
 import { screen } from "../../../utils";
 import { useNavigation } from "@react-navigation/native";
+import { Rating } from "@kolking/react-native-rating";
 
 export function RestaurantRaking(props) {
   const { restaurants } = props;
@@ -51,13 +52,7 @@ export function RestaurantRaking(props) {
                     <Text style={styles.titleName}>{item.name}</Text>
                   </View>
                   <View style={styles.ratingContainer}>
-                    <AirbnbRating
-                      count={5}
-                      isDisabled={true}
-                      defaultRating={item.ratingMedia}
-                      size={20}
-                      showRating={false}
-                    />
+                    <Rating size={20} rating={item.ratingMedia} disabled />
                     <Text style={styles.titleNameRating}>
                       {parseFloat(item.ratingMedia).toFixed(1)}
                     </Text>

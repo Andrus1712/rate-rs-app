@@ -1,16 +1,26 @@
 import { Dimensions, ScrollView } from "react-native";
 import { useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query, where } from "firebase/firestore";
-import { db } from "../../../utils";
+import { db, getAuth } from "../../../utils";
 
 import { styles } from "./RestaurantScreen.styles";
 import { CarouselComponent, Loading } from "../../../components";
 import { BtnFavorite, BtnReviewForm, Header, Info, Reviews } from "../../../components/Restaurant";
+import { onAuthStateChanged } from "firebase/auth";
 
 export function RestaurantScreen(props) {
   const { route } = props;
 
   const [restaurant, setRestaurant] = useState(null);
+  const [hasLogged, setHasLogged] = useState(false);
+
+  const auth = getAuth();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, user => {
+      setHasLogged(!!user);
+    });
+  }, [auth.currentUser]);
 
   useEffect(() => {
     setRestaurant(null);
@@ -43,7 +53,7 @@ export function RestaurantScreen(props) {
       <Info restaurant={restaurant} />
       <BtnReviewForm idRestaurant={restaurant.id} uidRestaurant={restaurant.uid} />
       <Reviews idRestaurant={restaurant.id} />
-      <BtnFavorite idRestaurant={restaurant.id} />
+      {hasLogged && <BtnFavorite idRestaurant={restaurant.id} />}
     </ScrollView>
   );
 }

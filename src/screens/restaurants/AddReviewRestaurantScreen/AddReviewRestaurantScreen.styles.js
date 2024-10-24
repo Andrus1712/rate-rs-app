@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   ratingContainer: {
     height: 160,
     justifyContent: "center",
+    alignItems: "center",
   },
   btnContainer: {
     marginBottom: 20,

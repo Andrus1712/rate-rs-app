@@ -1,31 +1,31 @@
 {
   "expo": {
-    "name": "curso-app",
-    "slug": "curso-app",
-    "version": "1.0.0",
+    "name": "rate-app",
+    "slug": "rate-app",
+    "version": "1.0.5",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/img/icon-official.png",
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#00a680"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.anonymous.curso-app"
+      "bundleIdentifier": "com.andrus.rate-app"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#00a680"
       },
       "permissions": [
         "android.permission.RECORD_AUDIO"
       ]
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/img/icon-official.png"
     },
     "plugins": [
       [
